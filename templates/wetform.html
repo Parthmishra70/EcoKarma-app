@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8" />
+	<title>SWM APP</title>
+
+	<!-- Site favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='/images/logoSWM.png') }}" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='/images/logoSWM.png') }}" />
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='/images/logoSWM.png') }}" />
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet" />
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vendors/styles/core.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vendors/styles/icon-font.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vsrc/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vendors/styles/style.css') }}" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+		crossorigin="anonymous"></script>
+	
+</head>
+
+<body>
+	
+
+	<!-- serch for -->
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon bi bi-list"></div>
+		</div>
+
+
+
+		<div class="header-right">
+			
+		
+			<div class="user-info-dropdown" style="margin-left: 50px;">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+
+						<a href="/logout">
+							<input class="dropdown-item" type="button" value="Log Out"/>
+						  </a>
+						  
+					<!-- <a class="dropdown-item" href="/logout"><i class="dw dw-logout"></i> Log Out</a> -->
+				</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+	
+
+	
+	<div class="mobile-menu-overlay"></div>
+
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <p class="mb-30">Carefully insertions</p>
+                </div>
+            </div>
+
+           
+            <form action="p" method="post">
+                
+                <div class="form-group">
+                    <label>Per kg</label>
+                    <input class="form-control"
+                        type="text" name="perkg" />
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-outline-primary">Submit</button>
+                </div>
+            </form>
+
+
+            <h1>{{ error }}</h1>
+        </div>
+
+        <!-- Include the necessary Bootstrap and jQuery libraries here -->
+    </div>
+
+
+
+
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+
+
+    	<!-- welcome modal end -->
+	<!-- js -->
+	<script src="{{ url_for('static', filename='/vendors/scripts/core.js') }}"></script>
+	<script src="{{ url_for('static', filename='/vendors/scripts/script.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='/vendors/scripts/process.js') }}"></script>
+	<script src="{{ url_for('static', filename='/vendors/scripts/layout-settings.js') }}"></script>
+	<script src="{{ url_for('static', filename='/src/plugins/apexcharts/apexcharts.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='/vendors/scripts/dashboard3.js') }}"></script>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
+			style="display: none; visibility: hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+</body>
+
+</html>

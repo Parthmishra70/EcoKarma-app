@@ -1,0 +1,48 @@
+
+{% extends "layout1.html" %} 
+        {% block content %} 
+<!-- min content  tble -->
+
+
+
+
+			<div class="main-container">
+				<div class="xs-pd-20-10 pd-ltr-20">
+					<div class="card-box pb-10">
+						<div class="h5 pd-20 mb-0">All Details</div>
+						<div class="table-responsive" data-table-responsive>
+							<table class="data-table table nowrap">
+								<thead>
+									<tr>
+										<th class="table-plus table-first">Name</th>
+										<th class="table-second">Category</th>
+										<th class="table-third">Quantity</th>
+										<th class="table-third">Price</th>
+										<th class="datatable-nosort table-last">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in item %}
+									<tr>
+										<td class="table-plus">{{ item.name }}</td>
+										<td>{{ item.category }}</td>
+										<td>{{ item.quantity }}</td>
+										<td>{{ item.price }}</td>
+										<td class="table-actions table-last">
+											<a href="/edit/{{ item.id }}" data-color="#265ed7"><i class="icon-copy dw dw-edit2"></i></a>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+
+		
+
+
+	{% endblock %} 

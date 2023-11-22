@@ -1,0 +1,212 @@
+{% extends "interlyout.html" %}
+{% block content %}
+
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4 class="text-blue h4">The Token: {{ req.token }}</h4>
+                    <p class="mb-30">Carefully insertions</p>
+                </div>
+            </div>
+
+            <form action="/editE/{{req.token}}" method="post">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" type="text" value="{{ req.name }}"
+                        name="name" readonly/>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input class="form-control"
+                        value="{{req.address}}"
+                        type="text" name="address" readonly />
+                </div>
+                <div class="form-group">
+                    <label>Telephone</label>
+                    <input class="form-control" value="{{req.phone}}" type="tel"
+                        name="phone" readonly/>
+                </div>
+
+
+
+
+                <!-- <div class="container">
+                    <br>
+
+                    <table class="table">
+                        <h3>For understanding</h3>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Total Price (Rs)</th>
+                                <th>Adjust Quantity</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="itemList">
+                            <tr>
+                                <th>{{req.itemnames}}</th>
+                                <th>{{req.itemquantities}}</th>
+                                <th>{{req.itemprice}}</th>
+                                <th><button type="button">+</button><button type="button">-</button></th>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                  
+                </div> -->
+                <div class="container">
+                    <br>
+                    <table class="table">
+                        <h3>For understanding</h3>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Total Price (Rs)</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="itemList">
+                            <tr>
+                                <td>{{req.itemnames}}</td>
+                                <td id="itemQuantity" >{{req.itemquantities}}</td>
+                                <td id="itemPrice">{{req.itemprice}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="col-md-6 form-group">
+                    <label for="allItemNames">All Item Names:</label>
+                    <input type="text" id="allItemNames" class="form-control"
+                         name="itemnames" value="{{req.itemnames}}">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="allQuantities">All Quantities:</label>
+                    <input type="text" id="allQuantities" class="form-control"
+                        value="{{req.itemquantities}}" name="itemquantities">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="allTotalPrices">Total Price for All Items
+                        (Rs):</label>
+                    <input type="number" id="allTotalPrices" class="form-control"
+                        min="0" value="{{req.itemprice}}" name="itemprice">
+                </div>
+                <div class="form-group">
+                    <label>Otp</label>
+                    <input class="form-control"  type="number"
+                        name="otp" />
+                </div>
+                <div class="form-group">
+                 <a href="/Resendcode"> Resendcode</a>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary">Submit</button>
+                </div>
+            </form>
+
+            <h1>{{ error }}</h1>
+        </div>
+
+        <!-- Include the necessary Bootstrap and jQuery libraries here -->
+    </div>
+
+
+    <!-- this is for cat6egory -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const categoryInput = document.getElementById("selectedTags");
+
+            document.querySelectorAll('.dropdown-menu a').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+                    const category = e.target.textContent;
+                    if (category) {
+                        e.preventDefault();
+                        categoryInput.value = categoryInput.value ? categoryInput.value + ', ' + category : category;
+                    }
+                });
+            });
+        });
+    </script>
+<script>
+    let items = [];
+
+    function addItem() {
+        const selectedItem = document.getElementById("item");
+        const selectedQuantity = parseInt(document.getElementById("quantity").value);
+        const selectedText = selectedItem.options[selectedItem.selectedIndex].text;
+
+        if (selectedQuantity > 0) {
+            items.push({
+                item: selectedText,
+                price: parseFloat(selectedItem.value),
+                quantity: selectedQuantity
+            });
+
+            displayItems();
+            calculateTotal();
+        }
+    }
+
+    function displayItems() {
+        const itemList = document.getElementById("itemList");
+        itemList.innerHTML = "";
+
+        items.forEach((item, index) => {
+            const row = itemList.insertRow(-1);
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+            const cell5 = row.insertCell(4);
+
+            cell1.innerHTML = item.item;
+            cell2.innerHTML = item.price;
+            cell3.innerHTML = item.quantity;
+            cell4.innerHTML = item.price * item.quantity;
+
+            // Create plus and minus buttons for quantity adjustment
+            const plusButton = document.createElement("button");
+            plusButton.textContent = "+";
+            plusButton.className = "btn btn-sm btn-primary";
+            plusButton.onclick = () => adjustQuantity(index, 1);
+            cell5.appendChild(plusButton);
+
+            const minusButton = document.createElement("button");
+            minusButton.textContent = "-";
+            minusButton.className = "btn btn-sm btn-danger";
+            minusButton.onclick = () => adjustQuantity(index, -1);
+            cell5.appendChild(minusButton);
+        });
+    }
+
+    function adjustQuantity(index, change) {
+        items[index].quantity += change;
+        if (items[index].quantity < 0) {
+            items[index].quantity = 0;
+        }
+        displayItems();
+        calculateTotal();
+    }
+
+    function calculateTotal() {
+        const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        document.getElementById("total-price").value = total.toLocaleString() + " Rs";
+    }
+</script>
+
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+
+    {% endblock %}
